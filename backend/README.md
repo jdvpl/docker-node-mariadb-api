@@ -14,3 +14,22 @@ conexion de docker node y mariadb
   mysql --host 127.0.0.1 -P 3308 -u root -p
   pass: tanjiro
 ```
+
+
+### Crear imagen desde el archivo dockerfile
+
+```
+   docker build -t node_backend_mariadb .
+```
+
+### crear imagen a partir del docker-compose
+
+```
+  docker-compose build
+```
+
+### Iniciar los containers
+
+```
+  docker-compose up
+```

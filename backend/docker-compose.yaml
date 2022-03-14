@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  node_backend_mariadb:
+    container_name: node_backend_mariadb
+    restart: always
+    build: .
+    ports:
+      - "5000:4000"
+    volumes: 
+      - .:/usr/src/app
+    links:
+      - mariadb_node_tanjiro
+    
+  mariadb_node_tanjiro:
+    container_name: mariadb_node_tanjiro
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: tanjiro
+      MYSQL_USER: tanjiro
+      MYSQL_PASSWORD: tanjiro
+      MYSQL_ROOT_PASSWORD: tanjiro
+    ports: 
+      - "3309:3306"
+    logging:
+      driver: none
+    

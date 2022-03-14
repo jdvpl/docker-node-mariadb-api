@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  node_backend_mariadb:
+    container_name: node_backend_mariadb
+    restart: always
+    build: ./backend
+    ports:
+      - "4000:4000"
+    volumes: 
+      - ./backend:/usr/src/app
+    links:
+      - mariadb_node_tanjiro
+    
+  mariadb_node_tanjiro:
+    container_name: mariadb_node_tanjiro
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: tanjiro
+      MYSQL_USER: tanjiro
+      MYSQL_PASSWORD: tanjiro
+      MYSQL_ROOT_PASSWORD: tanjiro
+    ports: 
+      - "3309:3306"
+  frontend_tanjiro_react:
+    container_name: frontend_tanjiro_react
+    build: ./frontend
+    expose:
+      - 5000
+    ports: 
+      - "5000:5000"
+    volumes:
+      - ./frontend:/usr/src/app
+  nginx:
+    image: nginx:alpine
+    build: ./nginx
+    ports:
+      - 81:80
+    links:
+      - frontend_tanjiro_react
+      - node_backend_mariadb
+    restart: always
+    

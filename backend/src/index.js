@@ -12,7 +12,7 @@ app.use(cors({
 
 app.use(express.json())
 
-app.get("/products", async (req, res) => {
+app.get("/api/products", async (req, res) => {
   try {
     // obtener conexion
     const conexion = await pool.getConection();
@@ -27,12 +27,15 @@ app.get("/products", async (req, res) => {
   }
 })
 
-app.post('/new-producto', async (req, res) => {
+app.get('/', (req,res) => {
+  res.send("hola desde el backend")
+})
+
+app.post('/api/new-producto', async (req, res) => {
   console.log(req.body.name)
   try {
     // obtener conexion
     const conexion = await pool.getConection();
-
     // crear nuevo producto
     const query = "INSERT INTO productos(name,date) VALUES (?,?);";
     // devuelve las filas

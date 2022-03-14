@@ -1,2 +1,0 @@
-const mariadb = require('mariadb');
-
